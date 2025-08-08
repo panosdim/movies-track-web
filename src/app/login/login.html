@@ -1,0 +1,63 @@
+<div class="login-container">
+  <div class="login-left">
+    <div class="movie-grid">
+      @if (posters().length === 0) {
+      <div class="movie-grid{{ posters().length === 0 ? ' loading' : '' }}">
+        <mat-spinner></mat-spinner>
+      </div>
+      } @if (posters().length > 0) { @for (movie of posters(); track movie) {
+      <a
+        href="https://www.themoviedb.org/movie/{{ movie.id }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          class="movie-poster"
+          src="{{ imageBaseUrl }}{{ movie.poster_path }}"
+          alt="{{ movie.title }}"
+        />
+      </a>
+      } }
+    </div>
+  </div>
+  <div class="login-right">
+    <mat-card class="login-card">
+      <div class="login-logo">
+        <img src="assets/icons/icon-128x128.png" />
+      </div>
+      <h2 class="login-title">Movies Track</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field appearance="fill" class="login-field">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="login-field">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="hide ? 'Show password' : 'Hide password'"
+            type="button"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loginForm.invalid"
+        >
+          <mat-icon>login</mat-icon> Login
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>
