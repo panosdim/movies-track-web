@@ -1,0 +1,30 @@
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <div class="header-content">
+      <div class="login-logo">
+        <img src="assets/icons/icon-48x48.png" />
+      </div>
+      <span class="header-title">Movies Track</span>
+      <div class="nav-buttons">
+        <a mat-button routerLink="/home">
+          <mat-icon>home</mat-icon>
+          Home
+        </a>
+        <a mat-button routerLink="/watched">
+          <mat-icon>local_activity</mat-icon>
+          Watched
+        </a>
+      </div>
+      <span class="spacer"></span>
+      <button
+        mat-button
+        matButton="tonal"
+        (click)="onLogout()"
+        class="logout-btn"
+      >
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

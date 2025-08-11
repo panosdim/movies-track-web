@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <span>Movies Track</span>
+  <span class="spacer"></span>
+  <button mat-icon-button routerLink="/home">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button mat-icon-button routerLink="/watched">
+    <mat-icon>local_activity</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onLogout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
