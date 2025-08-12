@@ -36,7 +36,6 @@ export class Login implements OnInit {
   hide = true;
   posters = signal<MovieType[]>([]);
   imageBaseUrl = environment.imageBaseUrl + 'w500';
-  // loginError signal removed, snackbar will be used
 
   constructor(
     private fb: FormBuilder,

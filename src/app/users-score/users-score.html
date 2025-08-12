@@ -1,0 +1,10 @@
+<div class="score-container">
+  <div
+    class="score-fill"
+    [class.score-fill--red]="score < 50"
+    [class.score-fill--yellow]="score >= 50 && score < 65"
+    [class.score-fill--green]="score >= 65"
+    [style.width.%]="score"
+  ></div>
+  <span class="score-text">Users score {{ score }}%</span>
+</div>

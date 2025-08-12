@@ -1,0 +1,33 @@
+.card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.movie-grid:has(mat-spinner),
+.movie-grid.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+mat-card-header {
+  margin-bottom: 1.5rem;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-content mat-card .movie-poster {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}

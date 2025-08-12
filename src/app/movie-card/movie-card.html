@@ -1,0 +1,25 @@
+<mat-card appearance="filled">
+  <a
+    href="https://www.themoviedb.org/movie/{{ movie.movieId }}"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      class="movie-poster"
+      mat-card-image
+      src="{{ imageBaseUrl }}{{ movie.poster }}"
+      alt="{{ movie.title }}"
+    />
+  </a>
+  <mat-card-content>
+    @if (movie.userScore !== null && movie.userScore !== 0) {
+    <app-users-score
+      [score]="Math.round((movie.userScore / 10) * 100)"
+    ></app-users-score>
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <button matButton="filled">Mark as watched</button>
+    <button matButton="tonal">Delete</button>
+  </mat-card-actions>
+</mat-card>
