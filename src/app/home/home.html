@@ -1,6 +1,7 @@
 <div class="home-container">
   @if (isMobile) {
   <mobile-toolbar />
+  <app-watchlist />
   } @else {
   <app-header />
   <app-suggestions />
@@ -16,3 +17,12 @@
   </p>
   }
 </div>
+<button
+  mat-fab
+  color="primary"
+  aria-label="Add movie"
+  class="fab-add"
+  routerLink="/add"
+>
+  <mat-icon>add</mat-icon>
+</button>

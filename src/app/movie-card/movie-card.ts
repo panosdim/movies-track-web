@@ -1,18 +1,44 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { environment } from '../../environments/environment';
 import { WatchListMovie } from '../models/watchlist';
+import { ConfirmationDialog } from '../shared/confirmation-dialog/confirmation-dialog';
 import { UsersScore } from '../users-score/users-score';
 
 @Component({
   selector: 'app-movie-card',
-  imports: [MatCardModule, MatButtonModule, UsersScore],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    UsersScore,
+    MatDialogModule
+],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.scss',
 })
 export class MovieCard {
   @Input({ required: true }) movie!: WatchListMovie;
-  imageBaseUrl = environment.imageBaseUrl + 'w300';
+  imageBaseUrl = environment.imageBaseUrl;
   protected readonly Math = Math;
+
+  private dialog = inject(MatDialog);
+
+  onDeleteClick() {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        title: 'Delete Movie',
+        message: `Are you sure you want to delete "${this.movie.title}" from your watchlist?`,
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        // TODO: Call the delete logic here (emit event or call service)
+      }
+    });
+  }
 }

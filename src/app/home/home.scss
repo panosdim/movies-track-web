@@ -22,3 +22,23 @@
   margin-top: 1.5rem;
   padding: 16px;
 }
+
+.fab-add {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .fab-add {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}

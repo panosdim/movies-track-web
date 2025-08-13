@@ -7,7 +7,7 @@
     <img
       class="movie-poster"
       mat-card-image
-      src="{{ imageBaseUrl }}w300{{ movie.poster }}"
+      src="{{ imageBaseUrl }}w185{{ movie.poster }}"
       alt="{{ movie.title }}"
     />
   </a>
@@ -43,7 +43,7 @@
     }
   </mat-card-content>
   <mat-card-actions>
-    <button matButton="filled">Mark as watched</button>
-    <button matButton="tonal" (click)="onDeleteClick()">Delete</button>
+    <button matIconButton><mat-icon>visibility</mat-icon></button>
+    <button matIconButton><mat-icon>delete</mat-icon></button>
   </mat-card-actions>
 </mat-card>
