@@ -8,7 +8,11 @@
       <div class="movie-grid{{ movies().length === 0 ? ' loading' : '' }}">
         <mat-spinner></mat-spinner>
       </div>
-      } @if (movies().length > 0) { @for (movie of movies(); track movie) {
+      }
+      <!-- prettier-ignore -->
+      @if (movies().length > 0) {
+      <!-- prettier-ignore -->
+      @for (movie of movies(); track movie.id) {
       <mat-card appearance="outlined">
         <a
           href="https://www.themoviedb.org/movie/{{ movie.id }}"
@@ -23,10 +27,11 @@
           />
         </a>
         <mat-card-actions>
-          <button matButton>Add to Watchlist</button>
+          <button matButton (click)="onAddToWatchlistClick(movie)">
+            Add to Watchlist
+          </button>
         </mat-card-actions>
       </mat-card>
-
       } }
     </div>
   </mat-card-content>

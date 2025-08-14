@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, catchError, of } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { MovieType } from '../models/movie';
 import { WatchListMovie } from '../models/watchlist';
 
 @Injectable({
@@ -41,5 +42,41 @@ export class Movies {
         return of([]);
       })
     );
+  }
+
+  addToWatchList(movie: MovieType): Observable<WatchListMovie> {
+    return this.http
+      .post<WatchListMovie>(environment.moviesUrl(), {
+        title: movie.title,
+        movieId: movie.id,
+        poster: movie.poster_path,
+      })
+      .pipe(
+        catchError((err) => {
+          console.error('Error adding movie to watchlist:', err);
+          this.snackBar.open(
+            `Error occurred while adding movie to watch list`,
+            'Close',
+            {
+              duration: 4000,
+            }
+          );
+          throw err;
+        })
+      );
+  }
+
+  deleteMovie(movie: WatchListMovie): Observable<void> {
+    return this.http
+      .delete<void>(environment.moviesUrl() + `/${movie.id}`)
+      .pipe(
+        catchError((err) => {
+          console.error('Error deleting movie:', err);
+          this.snackBar.open(`Error occurred while removing movie`, 'Close', {
+            duration: 4000,
+          });
+          throw err;
+        })
+      );
   }
 }

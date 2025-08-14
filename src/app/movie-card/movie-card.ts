@@ -4,17 +4,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { environment } from '../../environments/environment';
 import { WatchListMovie } from '../models/watchlist';
+import { Movies } from '../services/movies';
+import { Refresh } from '../services/refresh';
 import { ConfirmationDialog } from '../shared/confirmation-dialog/confirmation-dialog';
 import { UsersScore } from '../users-score/users-score';
 
 @Component({
   selector: 'app-movie-card',
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    UsersScore,
-    MatDialogModule
-],
+  imports: [MatCardModule, MatButtonModule, UsersScore, MatDialogModule],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.scss',
 })
@@ -22,8 +19,12 @@ export class MovieCard {
   @Input({ required: true }) movie!: WatchListMovie;
   imageBaseUrl = environment.imageBaseUrl;
   protected readonly Math = Math;
-
   private dialog = inject(MatDialog);
+
+  constructor(
+    private readonly moviesService: Movies,
+    private readonly refreshService: Refresh
+  ) {}
 
   onDeleteClick() {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
@@ -37,7 +38,14 @@ export class MovieCard {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        // TODO: Call the delete logic here (emit event or call service)
+        this.moviesService.deleteMovie(this.movie).subscribe({
+          next: () => {
+            this.refreshService.triggerRefresh();
+          },
+          error: (err) => {
+            console.error('Error deleting movie:', err);
+          },
+        });
       }
     });
   }
