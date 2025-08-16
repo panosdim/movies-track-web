@@ -44,6 +44,8 @@
   </mat-card-content>
   <mat-card-actions>
     <button matIconButton><mat-icon>visibility</mat-icon></button>
-    <button matIconButton><mat-icon>delete</mat-icon></button>
+    <button matIconButton (click)="onDeleteClick()">
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
