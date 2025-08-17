@@ -19,7 +19,7 @@ export class MovieCard {
   @Input({ required: true }) movie!: WatchListMovie;
   imageBaseUrl = environment.imageBaseUrl;
   protected readonly Math = Math;
-  private dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
 
   constructor(
     private readonly moviesService: Movies,
@@ -47,6 +47,17 @@ export class MovieCard {
           },
         });
       }
+    });
+  }
+
+  onMarkMovieAsWatched() {
+    this.moviesService.markMovieAsWatched(this.movie).subscribe({
+      next: () => {
+        this.refreshService.triggerRefresh();
+      },
+      error: (err) => {
+        console.error('Error deleting movie:', err);
+      },
     });
   }
 }

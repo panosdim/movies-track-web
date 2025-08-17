@@ -43,7 +43,9 @@
     }
   </mat-card-content>
   <mat-card-actions>
-    <button matIconButton><mat-icon>visibility</mat-icon></button>
+    <button matIconButton (click)="onMarkMovieAsWatched()">
+      <mat-icon>visibility</mat-icon>
+    </button>
     <button matIconButton (click)="onDeleteClick()">
       <mat-icon>delete</mat-icon>
     </button>

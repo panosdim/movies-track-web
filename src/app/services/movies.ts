@@ -79,4 +79,22 @@ export class Movies {
         })
       );
   }
+
+  markMovieAsWatched(movie: WatchListMovie): Observable<void> {
+    return this.http
+      .post<void>(environment.moviesUrl() + `/watched/${movie.id}`, {})
+      .pipe(
+        catchError((err) => {
+          console.error('Error marking movie as watched:', err);
+          this.snackBar.open(
+            `Error occurred while mark movie as watched`,
+            'Close',
+            {
+              duration: 4000,
+            }
+          );
+          throw err;
+        })
+      );
+  }
 }

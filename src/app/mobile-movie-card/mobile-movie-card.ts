@@ -21,7 +21,7 @@ export class MobileMovieCard {
   imageBaseUrl = environment.imageBaseUrl;
   protected readonly Math = Math;
 
-  private dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
 
   constructor(
     private readonly moviesService: Movies,
@@ -49,6 +49,17 @@ export class MobileMovieCard {
           },
         });
       }
+    });
+  }
+
+  onMarkMovieAsWatched() {
+    this.moviesService.markMovieAsWatched(this.movie).subscribe({
+      next: () => {
+        this.refreshService.triggerRefresh();
+      },
+      error: (err) => {
+        console.error('Error deleting movie:', err);
+      },
     });
   }
 }
