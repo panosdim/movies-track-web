@@ -1,5 +1,75 @@
-@if (isMobile) {
-<mobile-toolbar />
-} @else {
-<app-header />
-}
+<div class="container">
+  @if (isMobile) {
+  <mobile-toolbar />
+  } @else {
+  <app-header />
+  }
+
+  <mat-form-field class="search-form-field">
+    <mat-label>Movie Search</mat-label>
+    <input
+      matInput
+      type="search"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onValueChange($event)"
+    />
+    @if (searchTerm) {
+    <button
+      matSuffix
+      matIconButton
+      aria-label="Clear"
+      (click)="onClearSearchTerm()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+
+  <div class="search-results">
+    <!-- prettier-ignore -->
+    @if (searchResults().length > 0) {
+    <!-- prettier-ignore -->
+    @for (movie of searchResults(); track movie.id) {
+    <mat-card appearance="filled">
+      @if (isMobile) {
+      <img
+        class="movie-poster"
+        mat-card-image
+        src="{{ imageBaseUrl }}w300{{ movie.poster_path }}"
+        alt="{{ movie.title }}"
+        loading="lazy"
+      />
+      }
+      <mat-card-content>
+        @if (movie.poster_path && !isMobile) {
+        <img
+          src="{{ imageBaseUrl }}w185{{ movie.poster_path }}"
+          alt="{{ movie.title }}"
+          loading="lazy"
+        />
+        }
+        <div class="movie-info">
+          <div class="title">{{ movie.title }}</div>
+          <div class="release-date">{{ movie.release_date }}</div>
+          <p class="description">{{ movie.overview }}</p>
+          <app-users-score
+            class="users-score"
+            [score]="Math.round((movie.vote_average / 10) * 100)"
+          ></app-users-score>
+        </div>
+        <button
+          matButton="filled"
+          (click)="addMovieToWatchList(movie)"
+          [disabled]="isMovieAlreadyInWatchList(movie.id)"
+        >
+          Add to Watchlist
+        </button>
+      </mat-card-content>
+    </mat-card>
+    }
+    <!-- prettier-ignore -->
+    } @else if (searchTerm) {
+    <p>No results found for "{{ searchTerm }}"</p>
+    }
+  </div>
+</div>

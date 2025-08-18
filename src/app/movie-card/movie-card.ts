@@ -38,26 +38,16 @@ export class MovieCard {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.moviesService.deleteMovie(this.movie).subscribe({
-          next: () => {
-            this.refreshService.triggerRefresh();
-          },
-          error: (err) => {
-            console.error('Error deleting movie:', err);
-          },
+        this.moviesService.deleteMovie(this.movie).subscribe(() => {
+          this.refreshService.triggerRefresh();
         });
       }
     });
   }
 
   onMarkMovieAsWatched() {
-    this.moviesService.markMovieAsWatched(this.movie).subscribe({
-      next: () => {
-        this.refreshService.triggerRefresh();
-      },
-      error: (err) => {
-        console.error('Error deleting movie:', err);
-      },
+    this.moviesService.markMovieAsWatched(this.movie).subscribe(() => {
+      this.refreshService.triggerRefresh();
     });
   }
 }

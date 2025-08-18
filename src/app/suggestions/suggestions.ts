@@ -33,15 +33,10 @@ export class Suggestions {
   }
 
   onAddToWatchlistClick(movie: MovieType) {
-    this.moviesService.addToWatchList(movie).subscribe({
-      next: () => {
-        this.refreshService.triggerRefresh();
-        this.movies.set([]);
-        this.fetchData();
-      },
-      error: (err) => {
-        console.error('Error adding movie to watchlist:', err);
-      },
+    this.moviesService.addToWatchList(movie).subscribe(() => {
+      this.refreshService.triggerRefresh();
+      this.movies.set([]);
+      this.fetchData();
     });
   }
 

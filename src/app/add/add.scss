@@ -1,0 +1,92 @@
+@use "@angular/material" as mat;
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+}
+.search-form-field {
+  width: 500px;
+  align-self: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.search-results {
+  margin: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      display: none;
+    }
+  }
+
+  img {
+    flex-shrink: 0;
+  }
+
+  .movie-info {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+  }
+
+  button {
+    min-width: max-content;
+  }
+
+  .users-score {
+    min-width: 250px;
+    @media (max-width: 768px) {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .title {
+    font: var(--mat-sys-title-large);
+  }
+
+  .release-date {
+    font: var(--mat-sys-title-medium);
+  }
+
+  .description {
+    font: var(--mat-sys-body-large);
+  }
+
+  mat-card .movie-poster {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+}
