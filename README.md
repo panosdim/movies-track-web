@@ -1,6 +1,18 @@
-# MoviesTrackWeb
+# Movies Track
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.4.
+Keep a watch list of your movies and get watch info on streaming platforms. It uses a [REST API](https://github.com/panosdim/movies-track-app) as backend.
+
+## Screenshots
+
+![Login](https://github.com/user-attachments/assets/b244b09c-998b-4311-9f15-f181d3731a4d)
+![Home](https://github.com/user-attachments/assets/af272a89-1f51-45d9-8f75-e315f08396c8)
+![Watched](https://github.com/user-attachments/assets/6cd90f00-c67f-4ca4-8e69-64e5ee766d7d)
+![Search](https://github.com/user-attachments/assets/13782170-28cc-44e1-9b3d-cac28ca6b726)
+
+## Libraries Used
+
+- [Angular](https://angular.io/)
+- [Angular Material](https://material.angular.dev/)
 
 ## Development server
 
@@ -35,25 +47,3 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
