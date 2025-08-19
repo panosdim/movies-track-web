@@ -97,4 +97,19 @@ export class Movies {
         })
       );
   }
+
+  rateMovie(movie: WatchListMovie, rating: number): Observable<void> {
+    return this.http
+      .post<void>(environment.moviesUrl() + `/rate/${movie.id}`, {
+        rating: rating,
+      })
+      .pipe(
+        catchError((_err) => {
+          this.snackBar.open(`Error occurred while rating movie`, 'Close', {
+            duration: 4000,
+          });
+          return of();
+        })
+      );
+  }
 }

@@ -4,12 +4,23 @@
     target="_blank"
     rel="noopener noreferrer"
   >
+    @if (isMobile) {
+    <img
+      class="movie-poster"
+      mat-card-image
+      src="{{ imageBaseUrl }}w185{{ movie.poster }}"
+      alt="{{ movie.title }}"
+      loading="lazy"
+    />
+    } @else {
     <img
       class="movie-poster"
       mat-card-image
       src="{{ imageBaseUrl }}w300{{ movie.poster }}"
       alt="{{ movie.title }}"
+      loading="lazy"
     />
+    }
   </a>
   <mat-card-content>
     <div class="watch-info">
@@ -43,7 +54,18 @@
     }
   </mat-card-content>
   <mat-card-actions>
-    <button matButton="filled" (click)="onMarkMovieAsWatched()">Mark as watched</button>
+    @if (isMobile) {
+    <button matIconButton (click)="onMarkMovieAsWatched()">
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button matIconButton (click)="onDeleteClick()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    } @else {
+    <button matButton="filled" (click)="onMarkMovieAsWatched()">
+      Mark as watched
+    </button>
     <button matButton="tonal" (click)="onDeleteClick()">Delete</button>
+    }
   </mat-card-actions>
 </mat-card>

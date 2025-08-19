@@ -8,10 +8,11 @@ import { Movies } from '../services/movies';
 import { Refresh } from '../services/refresh';
 import { ConfirmationDialog } from '../shared/confirmation-dialog/confirmation-dialog';
 import { UsersScore } from '../users-score/users-score';
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-movie-card',
-  imports: [MatCardModule, MatButtonModule, UsersScore, MatDialogModule],
+  imports: [MatCardModule, MatButtonModule, UsersScore, MatDialogModule, MatIconModule],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.scss',
 })
@@ -20,6 +21,7 @@ export class MovieCard {
   imageBaseUrl = environment.imageBaseUrl;
   protected readonly Math = Math;
   private readonly dialog = inject(MatDialog);
+  isMobile = window.innerWidth <= 768;
 
   constructor(
     private readonly moviesService: Movies,

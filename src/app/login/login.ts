@@ -15,6 +15,7 @@ import { MovieType } from '../models/movie';
 import { User } from '../models/user';
 import { Authentication } from '../services/authentication';
 import { PopularMovies } from '../services/popular-movies';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ import { PopularMovies } from '../services/popular-movies';
     MatIconModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-  ],
+    MatProgressBarModule
+],
   templateUrl: './login.html',
   styleUrl: './login.scss',
   providers: [PopularMovies],
@@ -36,6 +38,7 @@ export class Login implements OnInit {
   hide = true;
   posters = signal<MovieType[]>([]);
   imageBaseUrl = environment.imageBaseUrl + 'w500';
+  isLoginInProgress = signal<boolean>(false);
 
   constructor(
     private fb: FormBuilder,
@@ -58,10 +61,12 @@ export class Login implements OnInit {
 
   onLogin() {
     if (this.loginForm.valid) {
+      this.isLoginInProgress.set(true);
       const { email, password } = this.loginForm.value;
       this.authService
         .login(email, password)
         .subscribe((user: User | null | undefined) => {
+          this.isLoginInProgress.set(false);
           if (user != undefined) {
             this.router.navigate(['home']);
           } else {

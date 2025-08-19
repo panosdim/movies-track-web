@@ -1,9 +1,11 @@
 import {
   ApplicationConfig,
+  importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { StarRatingModule } from 'angular-star-rating';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -15,5 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideRouter(routes),
+    importProvidersFrom(StarRatingModule.forRoot()),
   ],
 };
